@@ -17,10 +17,15 @@ export const getHomeView = async (req, res, next) => {
   }
 
   try {
-    porslineAnalysisResults = await porslineService.getSurveyResults();
+    porslineAnalysisResults = await porslineService.getSurveyAnalysis();
   } catch (error) {
     porslineAnalysisError = error.message;
   }
 
-  res.render("index", { comments, commentService });
+  res.render("index", {
+    comments,
+    commentService,
+    porslineAnalysisResults,
+    porslineAnalysisError,
+  });
 };
