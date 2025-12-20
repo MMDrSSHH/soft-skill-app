@@ -395,45 +395,38 @@
           </p>
         </div>
       </div>
-      <section class="w-[80%] mb-20">
-        <canvas id="myBarChart"></canvas>
-      </section>
+      <div class="container">
+        <canvas id="myChart"></canvas>
+    </div>
     </main>
   </body>
   <script>
-    // ۱. دریافت داده‌ها از سمت سرور (EJS) و تبدیل به فرمت قابل فهم برای جاوااسکریپت
-    // فرض می‌کنیم داده شما شامل لیبل‌ها و مقادیر است
-    // اگر دیتا نال بود، یک آبجکت خالی بگذار تا ارور ندهد
-    const rawData = <%- JSON.stringify(porslineAnalysisResults || []) %>;
-
-    // ۲. استخراج لیبل‌ها و اعداد از دیتای خام (بسته به ساختار دیتای شما این بخش تغییر می‌کند)
-    // مثال فرضی:
-    const labels = rawData.map(item => item.title); // مثلا عنوان سوالات
-    const values = rawData.map(item => item.score); // مثلا نمرات
-
-    // ۳. تنظیمات نمودار
-    const ctx = document.getElementById('myBarChart');
-
-    new Chart(ctx, {
-      type: 'bar', // نوع نمودار: میله‌ای
-      data: {
-        labels: labels, // محور افقی (نام‌ها)
-        datasets: [{
-          label: 'نتایج تحلیل پرس‌لاین',
-          data: values, // محور عمودی (اعداد)
-          backgroundColor: 'rgba(54, 162, 235, 0.6)', // رنگ میله‌ها
-          borderColor: 'rgba(54, 162, 235, 1)',
-          borderWidth: 1
-        }]
-      },
-      options: {
-        responsive: true,
-        scales: {
-          y: {
-            beginAtZero: true // شروع اعداد محور عمودی از صفر
-          }
+    const ctx = document.getElementById('myChart').getContext('2d');
+    
+    const myChart = new Chart(ctx, {
+        type: 'bar', // نوع نمودار: میله‌ای
+        data: {
+            labels: ['داده الف', 'داده ب', 'داده ج', 'داده د'], // محور افقی
+            datasets: [{
+                label: 'امتیازات',
+                data: [3, 4, 2, 1], // مقادیر ستون‌ها
+                backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: false, // شروع از صفر نباشد (طبق خواسته شما)
+                    min: 1,             // حداقل مقدار محور عمودی
+                    max: 4,             // حداکثر مقدار محور عمودی
+                    ticks: {
+                        stepSize: 1     // فاصله اعداد روی محور (۱، ۲، ۳، ۴)
+                    }
+                }
+            }
         }
-      }
     });
-  </script>
+</script>
 </html>
