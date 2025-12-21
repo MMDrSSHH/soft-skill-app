@@ -22,6 +22,8 @@ export const getHomeView = async (req, res, next) => {
     porslineAnalysisError = error.message;
   }
 
+  console.log(porslineAnalysisResults)
+
   res.render("index", {
     comments,
     commentService,

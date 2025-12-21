@@ -24,9 +24,9 @@ export const getSurveyResults = async () => {
     );
 
     const data = await response.json();
-
+    console.log(response)
     if (!Array.isArray(data.body)) {
-      throw new Error("Unable to process the data");
+      throw new Error("Unable to process the data", data);
     }
 
     // extract just the survey results
