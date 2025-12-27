@@ -26,9 +26,9 @@ export const getHomeView = async (req, res, next) => {
   console.log(comments)
 
   res.render("index", {
-    comments,
-    commentService,
-    porslineAnalysisResults,
+    comments: comments ?? [],
+    commentService: commentService ?? null,
+    porslineAnalysisResults: porslineAnalysisResults,
     porslineAnalysisError,
   });
 };
