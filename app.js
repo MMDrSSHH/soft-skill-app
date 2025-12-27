@@ -17,6 +17,10 @@ app.set("views", "./views");
 //#region routes
 app.use("/", homeRouter);
 app.use("/comments", commentRouter);
+
+app.use("/health", (_req, res) => {
+  res.status(200).send("App is ok");
+});
 //#endregion
 
 const server = createServer(app);
