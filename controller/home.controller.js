@@ -13,6 +13,7 @@ export const getHomeView = async (req, res, next) => {
   try {
     comments = await commentService.getComments();
   } catch (error) {
+    console.log(error);
     commentsError = error.message;
   }
 
@@ -22,7 +23,7 @@ export const getHomeView = async (req, res, next) => {
     porslineAnalysisError = error.message;
   }
 
-  console.log(porslineAnalysisResults)
+  console.log(comments)
 
   res.render("index", {
     comments,
