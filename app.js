@@ -18,7 +18,7 @@ app.set("views", "./views");
 app.use("/", homeRouter);
 app.use("/comments", commentRouter);
 
-app.use("/health", (_req, res) => {
+app.get("/health", (_req, res) => {
   res.status(200).send("App is ok");
 });
 //#endregion
